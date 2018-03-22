@@ -1,0 +1,6 @@
+{
+  "name": "eloquent3e",
+  "jest": {
+    "verbose": true
+  }
+}

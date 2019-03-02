@@ -2,5 +2,18 @@
   "name": "eloquent3e",
   "jest": {
     "verbose": true
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.9",
+    "editorconfig": "^0.15.2",
+    "parcel": "^1.11.0",
+    "steal": "^2.1.14"
+  },
+  "dependencies": {
+    "jest": "^24.1.0",
+    "jest-cli": "^24.1.0"
   }
 }

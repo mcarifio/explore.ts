@@ -60,11 +60,14 @@ Note that .gitignore is two folders up from here.
 
 * [ava assertions](https://github.com/avajs/ava/blob/master/docs/03-assertions.md#built-in-assertions)
 
-
 ## Tips
 
 When creating webstorm launchers, pay attention to the working directory so you can find the correct `node_modules` directory.
 It's confusing when the command line behaves differently from webstorm.
+
+The [webstorm debugger recipe](https://github.com/avajs/ava/blob/v0.25.0/docs/recipes/debugging-with-webstorm.md) works but don't add `--inspect-brk` on the webstorm
+node launcher. It just stalls webstorm. 
+
 
 ## TODO
 

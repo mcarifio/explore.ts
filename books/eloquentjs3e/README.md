@@ -7,15 +7,16 @@ look to change very quickly either.
 
 ## Setup
 
-* I use [webstorm](https://www.jetbrains.com/webstorm/) for coding. Wish I could say I love it.
+* I use [webstorm](https://www.jetbrains.com/webstorm/) for coding. Wish I could say I love it, but it's promise brings me
+back.
 
-* This project uses the [ava](https://github.com/avajs/ava) testing framework to learn ava.
+* This project uses the [ava](https://github.com/avajs/ava) testing framework. Ava supports ESM modules and I'm trying to learn it.
 
 
 ## Layout
 
-The project layout follows https://labs.mlssoccer.com/a-javascript-project-structure-i-can-finally-live-with-52b778041b72 and
-https://itnext.io/how-to-structure-a-vue-js-project-29e4ddc1aeeb for "client half" of the layout. 
+The project layout is guided by https://labs.mlssoccer.com/a-javascript-project-structure-i-can-finally-live-with-52b778041b72 and
+https://itnext.io/how-to-structure-a-vue-js-project-29e4ddc1aeeb for "client half" of the layout. Details:
 
 ```
 tree -cF -I node_modules
@@ -39,37 +40,34 @@ tree -cF -I node_modules
 │   └── hosts/ ## various "js hosts" partitioned by client or server and technology name (e.g. node or vuejs)
 │       ├── servers/
 │       │   └── nodejs/
-│       │       ├── chessboard-node-client.mjs
+│       │       ├── chessboard-node-client.mjs ## example use of chessboard module in nodejs
 │       │       ├── fizzbuzz-node-client.mjs
 │       │       └── min-node-client.mjs
 │       └── clients/
 │           ├── vuejs/
 │           └── html5/
-│               └── min-web-client.html
-├── .config/  ## configuration files for other tools, follow XDG naming convention
+│               └── min-web-client.html  ## example use of min.mjs in a vanilla html5 file
+├── .config/  ## configuration files for other tools, follow XDG naming conventions https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 ├── .editorconf  ## for editors
 ├── ava.config.js  ## for ava, e.g. the ava cli
 └── README.md  ## you are here
 
 ```
 
-Note that .git
+Note that .gitignore is two folders up from here.
 
 ## References
 
 * [ava assertions](https://github.com/avajs/ava/blob/master/docs/03-assertions.md#built-in-assertions)
 
 
+## Tips
+
+When creating webstorm launchers, pay attention to the working directory so you can find the correct `node_modules` directory.
+It's confusing when the command line behaves differently from webstorm.
+
 ## TODO
 
-* Test https://medium.com/samsung-internet-dev/isomorphic-es-modules-151f0d9a919b, https://www.npmjs.com/package/esm, https://medium.com/web-on-the-edge/tomorrows-es-modules-today-c53d29ac448c, https://github.com/kenotron/esm-jest, https://medium.com/passpill-project/files-with-mjs-extension-for-javascript-modules-ced195d7c84a, https://medium.com/@giltayar/native-es-modules-in-nodejs-status-and-future-directions-part-i-ee5ea3001f71. None of this worked.
-
- 
-
-```bash
-
-
-
-```
+* Configure webstorm to run the tests and examples (`hosts/**`) under the debugger. Seems hairy.
 
 * Convert this larger repo into a smaller set and then use gitree to combine them? Seems like a lot of work for no benefit other than learning gitree.

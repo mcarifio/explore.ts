@@ -74,3 +74,5 @@ node launcher. It just stalls webstorm.
 * Configure webstorm to run the tests and examples (`hosts/**`) under the debugger. Seems hairy.
 
 * Convert this larger repo into a smaller set and then use gitree to combine them? Seems like a lot of work for no benefit other than learning gitree.
+
+* Add travis.yml. Where?

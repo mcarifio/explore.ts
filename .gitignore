@@ -1,8 +1,8 @@
 # generated with make -f pj/bin/Makefile gitignore
-# /home/mcarifio/explore/ts/pj/bin/../gitignore.d/generated.gitignore
+# pj/gitignore.d/generated.gitignore
 *.log
 *0
 *.bak
 *~
-# /home/mcarifio/explore/ts/pj/bin/../gitignore.d/idea.gitignore
+# pj/gitignore.d/idea.gitignore
 .idea/**

@@ -7,4 +7,6 @@ TOP ?= $(here)/../..
 
 .PHONY: gitignore
 gitignore : $(TOP)/.gitignore
-$(TOP)/.gitignore : $(call rwildcard, $(here)/../gitignore.d, *.gitignore); echo "# generated with make -f $(makefile) gitignore" > $@; for f in $^; do echo "# $$f" >> $@; gpp $$f >> $@; done
+$(TOP)/.gitignore : $(call rwildcard, $(here)/../gitignore.d, *.gitignore)
+	echo "# generated with make -f $(makefile) gitignore" > $@
+	for f in $^; do echo "# $$(realpath --relative-to=$(TOP) $$f)" >> $@; gpp $$f >> $@; done

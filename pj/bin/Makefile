@@ -5,8 +5,10 @@ here := $(shell dirname $(realpath $(makefile)))
 # The folder where .envrc and .gitignore are
 TOP ?= $(here)/../..
 
-.PHONY: gitignore
+.PHONY: gitignore bootstrap
 gitignore : $(TOP)/.gitignore
 $(TOP)/.gitignore : $(call rwildcard, $(here)/../gitignore.d, *.gitignore)
 	echo "# generated with make -f $(makefile) gitignore" > $@
 	for f in $^; do echo "# $$(realpath --relative-to=$(TOP) $$f)" >> $@; gpp $$f >> $@; done
+
+# bootstrap:

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail; shopt -s nullglob
-declare -g _prefix="$(realpath -Lm $(dirname "$0"))/.subtrees"
+declare -g _prefix=".subtrees"
 
 subtree.add() (
     local _url=${1:?"${FUNCNAME} expecting a url"}

@@ -17,7 +17,7 @@ subtree.pull() (
     local _remote=${1:?"${FUNCNAME} expecting a remote"}
     local _branch=${2:-main}
     set -x
-    git subtree pull --prefix="${_prefix}" ${_remote} --squash
+    git subtree pull --prefix="${_prefix}" ${_remote} ${_branch} --squash
 )
 
 subtrees() (

@@ -8,10 +8,9 @@ PROOT := $(shell realpath $(here)/../../..)
 cmds := node npm tsc webstorm bun deno gjs just awk gpp	realpath ln
 
 include $(makefile).mk
+.PSEUDO: bootstrap generate lift clean
 
-.PSEUDO: bootstrap generate lift
 bootstrap: generate lift
-	@echo $@ >&2
 
 # lift pertinent config files from here to project root
 lifted := $(PROOT)/.gitignore
@@ -20,10 +19,15 @@ $(PROOT)/.gitignore: $(here)/.gitignore
 	ln -sr $< $@
 
 
-# [[ -r $@ ]] && xzcat $@ > $@-$(date +"%s").xz	
 generate: $(here)/.gitignore
 $(here)/.gitignore: 
 	curl --silent --no-progress-bar --show-error --location -o $@ https://www.toptal.com/developers/gitignore/api/bash,git,linux,node,deno,bun,javascript,ecmascript,typescript
+
+clean: $(lifted)
+	unlink $<
+	xz --force $(here)/.gitignore
+	echo "make -f $(makefile) bootstrap ## next" >&2
+
 
 
 

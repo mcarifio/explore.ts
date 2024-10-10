@@ -5,7 +5,6 @@ declare -g _prefix="$(realpath -Lm $(dirname "$0"))/.subtrees"
 subtree.add() (
     local _url=${1:?"${FUNCNAME} expecting a url"}
     local _remote=$(basename ${_url} .git)
-    # local _prefix=${2:?"${FUNCNAME} expecting a directory"}
     local _branch=${2:-}
     
     [[ -z "${_remote}" ]] && { echo "no remote name found for ${_url}" >&2; return 1; }
@@ -15,7 +14,6 @@ subtree.add() (
 
 subtree.pull() (
     local _remote=${1:?"${FUNCNAME} expecting a remote"}
-    # local _prefix=${2:?"${FUNCNAME} expecting a directory"}
     local _branch=${2:-}
     git subtree pull --prefix="${_prefix}" ${_remote} ${_branch} --squash
 )

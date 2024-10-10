@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail; shopt -s nullglob
-declare -g _prefix=".$(basename $0 .sh)"
+declare -g _root=".$(basename $0 .sh)"
 
 subtree.add() (
     local _url=${1:?"${FUNCNAME} expecting a url"}
@@ -9,14 +9,14 @@ subtree.add() (
     
     [[ -z "${_remote}" ]] && { echo "no remote name found for ${_url}" >&2; return 1; }
     git remote get-url ${_remote} &> /dev/null && git remote set-url ${_remote} "${_url}" || git remote add "${_remote}" "${_url}"    
-    git subtree add --prefix="${_prefix}" ${_remote} ${_branch} --squash    
+    git subtree add --prefix="${_root}/${_remote}" ${_remote} ${_branch} --squash    
 )
 
 subtree.pull() (
     local _remote=${1:?"${FUNCNAME} expecting a remote"}
     local _branch=${2:-main}
 
-    git subtree pull --prefix="${_prefix}" ${_remote} ${_branch} --squash
+    git subtree pull --prefix="${_root}/${_remote}" ${_remote} ${_branch} --squash
 )
 
 subtrees() (
@@ -25,7 +25,7 @@ subtrees() (
         subtree.add "${_url}" "${BASH_REMATCH[3]}"
         subtree.pull $(basename "${_url}" .git) "${BASH_REMATCH[3]}"
     done
-    echo "subtrees: ${_prefix}/*" >&2
+    echo "subtrees: ${_root}/*" >&2
 )
 
 subtrees gh:mcarifio/pj.git

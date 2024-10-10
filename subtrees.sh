@@ -7,6 +7,7 @@ subtree.add() (
     local _remote=$(basename ${_url} .git)
     local _branch=${2:-}
     
+    set -x
     [[ -z "${_remote}" ]] && { echo "no remote name found for ${_url}" >&2; return 1; }
     git remote get-url ${_remote} &> /dev/null && git remote set-url ${_remote} "${_url}" || git remote add "${_remote}" "${_url}"    
     git subtree add --prefix="${_prefix}" ${_remote} ${_branch} --squash    
@@ -15,6 +16,7 @@ subtree.add() (
 subtree.pull() (
     local _remote=${1:?"${FUNCNAME} expecting a remote"}
     local _branch=${2:-}
+    set -x
     git subtree pull --prefix="${_prefix}" ${_remote} ${_branch} --squash
 )
 

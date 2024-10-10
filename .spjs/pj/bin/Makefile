@@ -5,7 +5,7 @@ here := $(shell dirname $(realpath $(makefile)))
 # PROOT, top of this project
 PROOT ?= $(shell $(realpath $(here)/../../))
 # commands to check for
-cmds := node npm tsc webstorm bun deno gjs just awk gpp
+cmds := node npm tsc webstorm bun deno gjs just awk gpp	
 
 include $(makefile).mk
 

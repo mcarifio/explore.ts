@@ -15,4 +15,4 @@ variables:
 	@(( $(MAKELEVEL) < 1 )) && make -f $(makefile) -qp $@ | grep '^[a-zA-Z][a-zA-Z0-9_]* *:=' >&2
 
 check:
-	@for c in $(cmds); do type -p $$c &> /dev/null || echo $$c not on PATH >&2; done
+	@for c in $(cmds); do type -p $$c &> /dev/null || echo "command $$c not on PATH" >&2; done

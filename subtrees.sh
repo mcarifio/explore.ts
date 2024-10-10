@@ -25,7 +25,7 @@ subtrees() (
         subtree.add "${_url}" "${BASH_REMATCH[3]}"
         subtree.pull $(basename "${_url}" .git) "${BASH_REMATCH[3]}"
     done
-    echo "subtrees: ${_root}/*" >&2
+    find ${_root} -mindepth 1 -maxdepth 1 -type d
 )
 
 subtrees gh:mcarifio/pj.git

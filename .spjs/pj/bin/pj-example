@@ -1,9 +1,0 @@
-import? 'shared.just'
-
-@_default:
-        just --justfile {{justfile()}} list
-
-# how to capture status codes
-false:
-	#!/usr/bin/env bash
-	false || { status=$?; >&2 echo "{{invocation_directory()}} => ${status} "; exit ${status}; }

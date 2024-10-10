@@ -27,7 +27,7 @@ $(PROOT)/.gitignore: $(here)/.gitignore
 generate: $(here)/.gitignore
 $(here)/.gitignore: 
 	curl --silent --no-progress-bar --show-error --location -o $@ https://www.toptal.com/developers/gitignore/api/bash,git,linux,node,deno,bun,javascript,ecmascript,typescript
-	printf '\n\n.envrc' >> $@
+	printf '\n\n.envrc\n.gitignore\n' >> $@
 
 clean: $(lifted)
 	unlink $<

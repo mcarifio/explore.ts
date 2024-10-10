@@ -10,19 +10,18 @@ cmds := node npm tsc webstorm bun deno gjs just awk gpp
 include $(makefile).mk
 
 .PSEUDO: bootstrap
-bootstrap: lift
+bootstrap: generate lift
 	@echo $@ >&2
 
 # lift pertinent config files from here to project root
-LIFTED := $(PROOT)/.gitignore
-lift: $(LIFTED)
+lifted := $(PROOT)/.gitignore
+lift: $(lifted)
+$(PROOT)/.gitignore : $(here)/.gitignore
+	ln -sr $< $@ &> || true
 
-# .gitignore
-# generate $(here)/.gitignore from parts of gitignore.d then link $(PROOT) to that.
-$(PROOT)/.gitignore: $(here)/.gitignore
-	cp $< $@
-
-
+# generate some configuration files from parts, e.g. gitignore.d
+generated := $(here)/.gitignore
+generate: $(generated)
 $(here)/.gitignore : $(call rwildcard, $(here)/../gitignore.d, *.gitignore)
-	echo "# $$(realpath --relative-to=$(PROOT) $@) generated with make -f $(makefile) $@" > $@
-	for f in $< $^; do echo "# $$(realpath --relative-to=$(PROOT) $$f)" >> $@; gpp $$f >> $@; done
+	echo "# $$(basename $@) generated with make -f $$(realpath --relative-to=$(PROOT) $(makefile)) generate $@" > $@
+	for f in $^; do echo "# $$(realpath --relative-to=$(PROOT) $$f)" >> $@; gpp $$f >> $@; prinf "\n\n"; done

@@ -1,9 +1,10 @@
-# /home/mcarifio/explore/ts/.spjs/pj/bin/.gitignore generated with make -f /home/mcarifio/explore/ts/.spjs/pj/bin/Makefile /home/mcarifio/explore/ts/.spjs/pj/bin/.gitignore
-.spjs/pj/bin/.gitignore
+# .gitignore generated with make -f .spjs/pj/bin/Makefile .gitignore
+
 # .spjs/pj/gitignore.d/generated.gitignore
 *.log
 *0
 *.bak
 *~
+
 # .spjs/pj/gitignore.d/idea.gitignore
 **/.idea/**

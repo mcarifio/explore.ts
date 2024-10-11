@@ -9,20 +9,22 @@ subtree.add() (
     local _remote=$(basename ${_url} .git)
     local _branch=${2:-main}
     local _prefix=${3:-${_subtree}}
+    local _location="${_prefix}/${_remote}"
     
     [[ -z "${_remote}" ]] && { echo "no remote name found for ${_url}" >&2; return 1; }
-    git remote get-url --no-push ${_remote} &> /dev/null && git remote remove ${_remote}
+    git remote get-url ${_remote} &> /dev/null && git remote remove ${_remote}
     git remote add --fetch "${_remote}" "${_url}"
     # git remote set-url --delete "${_remote}" "${_url}"
-    git subtree add --prefix="${_prefix}/${_remote}" ${_remote} ${_branch} --squash    
+    # [[ -d "${_top}/${_location}" ]] && mv -v "${_top}/${_location}" /tmp
+    git subtree add --prefix="${_location}" ${_remote} ${_branch} --squash    
 )
 
 subtree.pull() (
     local _remote=${1:?"${FUNCNAME} expecting a remote"}
     local _branch=${2:-main}
     local _prefix=${3:-${_subtree}}
-
-    git subtree pull --prefix="${_prefix}/${_remote}" ${_remote} ${_branch} --squash
+    local _location="${_prefix}/${_remote}"
+    git subtree pull --prefix="${_location}" ${_remote} ${_branch} --squash
 )
 
 subtrees() (
@@ -40,7 +42,9 @@ main() (
     type -p direnv &> /dev/null || return 0
     cp -v ${_prefix}/pj/bin/.envrc "${_top}/"
     direnv allow
-    grep -s -E "^${_prefix}" ${_top}/.gitignore || printf "\n\n# $0 added\n${_prefix}/" >> ${_top}/.gitignore
+    grep -s -E "^${_prefix}" ${_top}/.gitignore && return 0
+    printf "\n\n# $0 added\n${_prefix}/" >> ${_top}/.gitignore
+    git commit --force -m "$0 modified ${_top}/.gitignore" ${_top}/.gitignore
 )
 
 main "${_subtree}" gh:mcarifio/pj.git

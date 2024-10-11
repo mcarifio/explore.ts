@@ -44,7 +44,7 @@ main() (
     direnv allow
     grep -s -E "^${_prefix}" ${_top}/.gitignore && return 0
     printf "\n\n# $0 added\n${_prefix}/" >> ${_top}/.gitignore
-    git commit --force -m "$0 modified ${_top}/.gitignore" ${_top}/.gitignore
+    git commit -m "$0 modified ${_top}/.gitignore" ${_top}/.gitignore
 )
 
 main "${_subtree}" gh:mcarifio/pj.git

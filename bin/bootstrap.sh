@@ -2,7 +2,7 @@
 set -Eeuo pipefail; shopt -s nullglob
 
 declare -g _top="$(realpath -Lm $(dirname $0)/..)"
-declare -g _subtrees="subtrees"
+declare -g _subtree="subtree"
 
 subtree.add() (
     local _url=${1:?"${FUNCNAME} expecting a url"}
@@ -40,5 +40,5 @@ main() (
     direnv allow
 )
 
-main ${_subtree} gh:mcarifio/pj.git
+main "${_subtree}" gh:mcarifio/pj.git
 

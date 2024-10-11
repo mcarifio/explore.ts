@@ -16,21 +16,23 @@ include $(makefile).mk
 bootstrap: generate lift
 	echo $@ complete.
 
-# Lift (symbolic link) pertinent config files from here to project root
-lifted := $(PROOT)/.gitignore
+# Lift (copy) pertinent config files from here to project root
+lifted := $(PROOT)/.envrc $(PROOT)/.gitignore
 lift: $(lifted)
+$(PROOT)/.envrc: $(here)/.envrc
+	cp -v $< $@
 $(PROOT)/.gitignore: $(here)/.gitignore
-	ln -sr $< $@
+	cp -v $< $@
 
 
 # Some configuration is generated.
 generate: $(here)/.gitignore
 $(here)/.gitignore: 
 	curl --silent --no-progress-bar --show-error --location -o $@ https://www.toptal.com/developers/gitignore/api/bash,git,linux,node,deno,bun,javascript,ecmascript,typescript
+	echo .envrc >> $@
 
 clean: $(lifted)
-	unlink $<
-	xz --force $(here)/.gitignore
+	xz --force $<
 	@echo "make -f $(makefile) bootstrap ## next" >&2
 
 

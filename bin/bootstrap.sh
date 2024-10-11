@@ -36,7 +36,7 @@ main() (
     local _prefix="${1:-${_subtree}}"; shift
     subtrees "${_prefix}" "${@:-}"
     type -p direnv &> /dev/null || return 0
-    ln -sr ${_prefix}/pj/bin/.envrc "${_top}/.envrc"
+    cp -v ${_prefix}/pj/bin/.envrc "${_top}/"
     direnv allow
 )
 

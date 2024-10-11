@@ -196,9 +196,4 @@ dist
 
 
 # bin/bootstrap.sh added
-subtree/.envrc
-.gitignore
-.envrc
-.gitignore
-.envrc
-.gitignore
+subtree/

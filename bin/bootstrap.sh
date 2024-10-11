@@ -11,7 +11,9 @@ subtree.add() (
     local _prefix=${3:-${_subtree}}
     
     [[ -z "${_remote}" ]] && { echo "no remote name found for ${_url}" >&2; return 1; }
-    git remote get-url ${_remote} &> /dev/null && git remote set-url ${_remote} "${_url}" || git remote add "${_remote}" "${_url}"    
+    git remote get-url --no-push ${_remote} &> /dev/null && git remote remove ${_remote}
+    git remote add --fetch "${_remote}" "${_url}"
+    # git remote set-url --delete "${_remote}" "${_url}"
     git subtree add --prefix="${_prefix}/${_remote}" ${_remote} ${_branch} --squash    
 )
 
@@ -38,6 +40,7 @@ main() (
     type -p direnv &> /dev/null || return 0
     cp -v ${_prefix}/pj/bin/.envrc "${_top}/"
     direnv allow
+    grep -s -E "^${_prefix}" ${_top}/.gitignore || printf "\n\n# $0 added\n${_prefix}/" >> ${_top}/.gitignore
 )
 
 main "${_subtree}" gh:mcarifio/pj.git

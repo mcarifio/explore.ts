@@ -49,7 +49,7 @@ main() (
         direnv allow || true
         git add ${_top}/.envrc
     fi
-    find ${_top} -name gitignore.io.sh -type x >&2 && echo "## next"
+    find ${_top} -name gitignore.io.sh -type f --executable >&2 && echo "## next"
 )
 
 main "${_subtree}" gh:mcarifio/pj.git
